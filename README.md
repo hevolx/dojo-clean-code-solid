@@ -4,30 +4,35 @@
 
 A Coding Dojo based on the universe of Metal Gear Solid. Five exercises will be presented to introduce the principles behind the SOLID acronym.
 
-## Solution - Interface Segregation Principle
+## Dojo
 
-The `Repository<T, K>` interface was monolithic — it bundled `add`, `findAll`, `findById`, and `delete` into a single contract. Adding `delete` forced every repository implementation to implement it, even those that should never support deletion.
+### Dependency Inversion Principle
 
-**The fix:**
+> "High level modules should not depend upon low level modules. Both should depend upon abstractions." Robert C. Martin.
 
-`Repository.java` was split into four focused role interfaces:
+> "Abstractions should not depend upon details. Details should depend upon abstraction." Robert C. Martin.
 
-- `Add<T>` — for adding elements
-- `FindAll<T>` — for listing all elements
-- `FindById<T, K>` — for finding a single element by id
-- `Delete<K>` — for deleting elements (only used where truly needed)
+If you commit to a specific database — say, an in-memory store — you reference it directly everywhere. Then right before shipping, your boss tells you the requirements changed and you must use a different store. Now you have to search the entire codebase and replace every reference...
 
-Each repository interface now only extends the roles it actually needs:
-
-```java
-public interface AgentsRepository extends Add<Agent>, FindAll<Agent>, FindById<Agent, String> {}
-```
-
-Checkout into the next exercise:
+This is exactly what the **Dependency Inversion Principle** prevents. Instead of depending on `InMemoryAgentsRepository`, you depend on `AgentsRepository` (the abstraction). Swapping to a new implementation only requires one change at the wiring point.
 
 ```
-git checkout java-exercise-5
+One last thing to greatly improve our project and you will be free to go.
+
+The team wants to be able to try numerous technical choices before deciding which one to use in production.
+
+To do so, we need to rethink our application to remove any explicit references!
 ```
+
+#### Exercise
+
+Checkout into the `java-exercise-5` branch.
+
+`AgentsService` makes an explicit reference to the concrete `InMemoryAgentsRepository` class.
+
+Look for the `TODO (Exercise 5 - DIP)` comment and abstract the dependency.
+
+You will find a solution to this exercise in the `java-exercise-5-solution` branch.
 
 ## Requirements
 

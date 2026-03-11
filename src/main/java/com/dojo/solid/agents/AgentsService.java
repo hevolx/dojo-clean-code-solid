@@ -6,9 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class AgentsService {
-    private AgentsRepository agentsRepository;
+    // TODO (Exercise 5 - DIP): AgentsService depends on the concrete InMemoryAgentsRepository
+    //  class instead of the AgentsRepository interface.
+    //  High-level modules should not depend on low-level modules; both should depend on abstractions.
+    //  Change the field type and constructor parameter to use the AgentsRepository interface.
+    private InMemoryAgentsRepository agentsRepository;
 
-    public AgentsService(AgentsRepository agentsRepository) {
+    public AgentsService(InMemoryAgentsRepository agentsRepository) {
         this.agentsRepository = agentsRepository;
     }
 

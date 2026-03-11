@@ -12,7 +12,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AgentsTest {
-    private AgentsRepository agentsRepository;
+    private InMemoryAgentsRepository agentsRepository;
     private AgentsService agentsService;
     private List<Agent> agents;
 
