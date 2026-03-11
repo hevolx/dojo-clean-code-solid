@@ -4,35 +4,23 @@
 
 A Coding Dojo based on the universe of Metal Gear Solid. Five exercises will be presented to introduce the principles behind the SOLID acronym.
 
-## Dojo
+## Solution - Dependency Inversion Principle
 
-### Dependency Inversion Principle
+`AgentsService` was depending on the concrete `InMemoryAgentsRepository` class. This means that if we ever want to swap out the in-memory store for a real database, we must modify `AgentsService` itself — a clear violation of DIP.
 
-> "High level modules should not depend upon low level modules. Both should depend upon abstractions." Robert C. Martin.
+**The fix:**
 
-> "Abstractions should not depend upon details. Details should depend upon abstraction." Robert C. Martin.
+- `AgentsService.agentsRepository` field type changed from `InMemoryAgentsRepository` to `AgentsRepository`.
+- The constructor parameter was changed in the same way.
+- `AgentsService` now depends only on the abstraction — the specific implementation is provided by the caller.
 
-If you commit to a specific database — say, an in-memory store — you reference it directly everywhere. Then right before shipping, your boss tells you the requirements changed and you must use a different store. Now you have to search the entire codebase and replace every reference...
+Now `AgentsService` works with any `AgentsRepository` implementation without knowing which one it is.
 
-This is exactly what the **Dependency Inversion Principle** prevents. Instead of depending on `InMemoryAgentsRepository`, you depend on `AgentsRepository` (the abstraction). Swapping to a new implementation only requires one change at the wiring point.
+Checkout into the conclusion:
 
 ```
-One last thing to greatly improve our project and you will be free to go.
-
-The team wants to be able to try numerous technical choices before deciding which one to use in production.
-
-To do so, we need to rethink our application to remove any explicit references!
+git checkout java-conclusion
 ```
-
-#### Exercise
-
-Checkout into the `java-exercise-5` branch.
-
-`AgentsService` makes an explicit reference to the concrete `InMemoryAgentsRepository` class.
-
-Look for the `TODO (Exercise 5 - DIP)` comment and abstract the dependency.
-
-You will find a solution to this exercise in the `java-exercise-5-solution` branch.
 
 ## Requirements
 
