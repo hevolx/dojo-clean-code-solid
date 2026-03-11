@@ -32,6 +32,13 @@ I highly recommend you to read "Clean Architecture: A Craftsman's Guide to Softw
 
 Checkout into the first part's branch to start the Coding Dojo :
 
+**JavaScript**:
 ```
 git checkout js-exercise-1
+```
+
+**Java**:
+
+```
+git checkout java-exercise-1
 ```
