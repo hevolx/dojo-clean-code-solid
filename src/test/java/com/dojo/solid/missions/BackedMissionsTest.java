@@ -5,6 +5,7 @@ import com.dojo.solid.missions.backedMissions.BackedMission;
 import com.dojo.solid.missions.backedMissions.BackedMissionsRepository;
 import com.dojo.solid.missions.backedMissions.BackedMissionsService;
 import com.dojo.solid.missions.backedMissions.InMemoryBackedMissionsRepository;
+import com.dojo.solid.missions.errors.InvalidMission;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +42,7 @@ class BackedMissionsTest {
         backedMissionsRepository = new InMemoryBackedMissionsRepository();
         backedMissionsService = new BackedMissionsService(backedMissionsRepository);
         for (BackedMission mission : backedMissions) {
-            backedMissionsService.addMission(mission);
+            backedMissionsService.addBackedMission(mission);
         }
     }
 
@@ -65,5 +66,14 @@ class BackedMissionsTest {
 
         assertTrue(missionInfo.isPresent());
         assertFalse(missionInfo.get().getBackup().contains(merylSilverburgh));
+    }
+
+    @Test
+    void shouldNotBeAbleToAddABackedMissionWithoutABackup() {
+        BackedMission tselinoyarskMission = new BackedMission(
+                "tselinoyarsk", "Tselinoyarsk", solidSnake, new ArrayList<>());
+
+        assertThrows(InvalidMission.class,
+                () -> backedMissionsService.addBackedMission(tselinoyarskMission));
     }
 }

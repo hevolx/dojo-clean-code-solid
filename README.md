@@ -4,37 +4,24 @@
 
 A Coding Dojo based on the universe of Metal Gear Solid. Five exercises will be presented to introduce the principles behind the SOLID acronym.
 
-## Dojo
+## Solution - Liskov Substitution Principle
 
-### Liskov Substitution Principle
+The violation was that `BackedMissionsService.addMission()` **overrode** the parent's `addMission()` with a stronger precondition. Any code calling `addMission()` on a `MissionsService` reference would break if the object was actually a `BackedMissionsService`.
 
-> "Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it." Robert C. Martin.
+**The fix:**
 
-This principle is about substitutability: if `S` is a subtype of `T`, you should be able to use an `S` wherever a `T` is expected — without breaking anything.
+- The override of `addMission()` was removed.
+- A new method `addBackedMission(BackedMission)` was introduced instead.
+- The extra precondition (must have backup) only lives in this new method — it does not affect the parent's contract.
+- A test was added to verify that `addBackedMission` without a backup throws `InvalidMission`.
 
-Two key rules:
-1. **Never strengthen preconditions** in a subtype. A subclass method should accept at least the same inputs as the parent.
-2. **Never weaken postconditions** in a subtype. A subclass method should produce at least as strong a guarantee as the parent.
+Now `BackedMissionsService` can safely substitute `MissionsService` anywhere.
+
+Checkout into the next exercise:
 
 ```
-Still with us ? We need you more than ever with this issue.
-
-The project acts oddly depending on the implementation, no matter how precise the API is...
-
-Spot the weak substitution and fix it.
+git checkout java-exercise-4
 ```
-
-#### Exercise
-
-Checkout into the `java-exercise-3` branch.
-
-The team has decided that a `BackedMission` must have at least one backup agent.
-
-Look at `BackedMissionsService`. It **overrides** `addMission()` and adds a new precondition: the mission must have a backup. This violates LSP — you cannot substitute a `BackedMissionsService` for a `MissionsService` because the behavior of `addMission()` is different.
-
-Look for the `TODO (Exercise 3 - LSP)` comment for a hint.
-
-You will find a solution to this exercise in the `java-exercise-3-solution` branch.
 
 ## Requirements
 
