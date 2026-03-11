@@ -1,6 +1,7 @@
 package com.dojo.solid.missions;
 
 import com.dojo.solid.agents.Agent;
+import com.dojo.solid.missions.backedMissions.InMemoryBackedMissionsRepository;
 import com.dojo.solid.missions.errors.InvalidMission;
 import com.dojo.solid.missions.errors.MissionConflict;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +44,7 @@ class MissionsTest {
         for (Mission mission : missions) {
             missionsRepository.add(mission);
         }
-        missionsService = new MissionsService(missionsRepository);
+        missionsService = new MissionsService(missionsRepository, new InMemoryBackedMissionsRepository());
     }
 
     @Nested
