@@ -4,29 +4,45 @@
 
 A Coding Dojo based on the universe of Metal Gear Solid. Five exercises will be presented to introduce the principles behind the SOLID acronym.
 
-## Introduction
+## Dojo
+
+### Single Responsibility Principle
+
+> "A class should have only one reason to change." Robert C. Martin.
+
+Think of the last time you tried to debug that particular method that was responsible of :
+
+1. Checking if there is enough coffee and water left;
+2. Prepare the coffee if the first condition is fulfilled;
+3. Pour the coffee and the milk if necessary;
+4. Add sugar; and
+5. Notify the user that his coffee is ready !
+
+All of that in the `CoffeeService` !
+
+Now, imagine a world where all the coffee business is managed by the `CoffeeService`, the sugar business by the `SugarService`, and so on..
+
+Wouldn't it be nice ? Easily testable and debuggable ?
+
+This is the philosophy behind the **Single Responsibility Principle**, every part of the code should be responsible for one thing and it should be very talented at doing it !
 
 **Transmission received...**
 
 ```
-Snake, we need your help.
+Snake, we have found your first target.
 
-Our agent management system has been compromised and we are trying to rebuild another one in Java.
-
-The system is used to keep track of all of our agents and their missions. No big deal for a clean coder like you, am I right ?
-
-We are almost done, but something is missing, like if we were building the project without thinking of the maintainability, flexibility and understandability...
-
-Your goal is to find the project's flaws and eliminate them. Our first analysis has shown that there is one of them per principle behind the SOLID acronym, whatever it means.
+This is a common case of a junk room class ! Clean it by making sure that the responsibilities are at the right place.
 ```
 
-Follow the instructions and try to complete the exercises so you will have a proper introduction to the Clean Code / Clean Architecture as instructed by Uncle Bob !
+#### Exercise
 
-For each section, you will have to checkout into the git branch with a flaw to fix. There is no perfect solution to those problems, try your best to clean the code but do not spend too much time scratching your head.
+Checkout into the `java-exercise-1` branch.
 
-A branch with a solution is provided for every exercise, feel free to compare it with your own !
+Try to clean up the `addMission` method in the `MissionsService` by splitting the responsibilities into different classes.
 
-I highly recommend you to read "Clean Architecture: A Craftsman's Guide to Software Structure and Design" by Robert C. Martin after you completed the dojo. It contains a deeper dive into the SOLID principles and many more.
+Look for the `TODO (Exercise 1 - SRP)` comments in the code for hints on where to start.
+
+You will find a solution to this exercise in the `java-exercise-1-solution` branch.
 
 ## Requirements
 
@@ -37,12 +53,4 @@ I highly recommend you to read "Clean Architecture: A Craftsman's Guide to Softw
 
 ```
 mvn test
-```
-
-## Dojo
-
-Checkout into the first part's branch to start the Coding Dojo :
-
-```
-git checkout java-exercise-1
 ```
