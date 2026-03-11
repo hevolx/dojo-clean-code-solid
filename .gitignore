@@ -1,1 +1,9 @@
-/node_modules
+target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+.classpath
+.project
+.settings/
