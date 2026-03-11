@@ -1,10 +1,10 @@
 package com.dojo.solid.missions.backedMissions;
 
-import com.dojo.solid.standards.repositories.Repository;
+import com.dojo.solid.missions.MissionsRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface BackedMissionsRepository extends Repository<BackedMission, String> {
-    List<BackedMission> findByAgent(String agentId);
+public interface BackedMissionsRepository extends MissionsRepository {
+    Optional<BackedMission> findBackedById(String id);
     boolean removeBackup(String missionId, String backupId);
 }

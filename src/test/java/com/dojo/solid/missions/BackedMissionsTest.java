@@ -3,6 +3,7 @@ package com.dojo.solid.missions;
 import com.dojo.solid.agents.Agent;
 import com.dojo.solid.missions.backedMissions.BackedMission;
 import com.dojo.solid.missions.backedMissions.BackedMissionsRepository;
+import com.dojo.solid.missions.backedMissions.BackedMissionsService;
 import com.dojo.solid.missions.backedMissions.InMemoryBackedMissionsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BackedMissionsTest {
     private BackedMissionsRepository backedMissionsRepository;
-    private MissionsService backedMissionsService;
+    private BackedMissionsService backedMissionsService;
 
     private List<BackedMission> backedMissions;
     private Agent solidSnake;
@@ -38,20 +39,20 @@ class BackedMissionsTest {
         backedMissions.add(shadowMosesMission);
 
         backedMissionsRepository = new InMemoryBackedMissionsRepository();
+        backedMissionsService = new BackedMissionsService(backedMissionsRepository);
         for (BackedMission mission : backedMissions) {
-            backedMissionsRepository.add(mission);
+            backedMissionsService.addMission(mission);
         }
-        backedMissionsService = new MissionsService(new InMemoryMissionsRepository(), backedMissionsRepository);
     }
 
     @Test
     void shouldProvideListOfAllBackedMissions() {
-        assertEquals(backedMissions, backedMissionsService.getAllBackedMissions());
+        assertEquals(backedMissions, backedMissionsService.getAllMissions());
     }
 
     @Test
     void shouldProvideMissionOfAgentWhenHeIsABackup() {
-        assertTrue(backedMissionsService.getAgentBackedMissions("meryl-silverburgh")
+        assertTrue(backedMissionsService.getAgentMissions("meryl-silverburgh")
                 .contains(shadowMosesMission));
     }
 

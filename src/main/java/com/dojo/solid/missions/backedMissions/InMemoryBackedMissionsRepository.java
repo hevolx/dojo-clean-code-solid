@@ -1,6 +1,7 @@
 package com.dojo.solid.missions.backedMissions;
 
 import com.dojo.solid.agents.Agent;
+import com.dojo.solid.missions.Mission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,25 +12,33 @@ public class InMemoryBackedMissionsRepository implements BackedMissionsRepositor
     private List<BackedMission> missions = new ArrayList<>();
 
     @Override
-    public boolean add(BackedMission mission) {
-        missions.add(mission);
+    public boolean add(Mission mission) {
+        missions.add((BackedMission) mission);
         return true;
     }
 
     @Override
-    public List<BackedMission> findAll() {
+    public List<Mission> findAll() {
         return new ArrayList<>(missions);
     }
 
     @Override
-    public Optional<BackedMission> findById(String missionId) {
+    public Optional<Mission> findById(String missionId) {
+        return missions.stream()
+                .filter(m -> missionId.equals(m.getId()))
+                .map(m -> (Mission) m)
+                .findFirst();
+    }
+
+    @Override
+    public Optional<BackedMission> findBackedById(String missionId) {
         return missions.stream()
                 .filter(m -> missionId.equals(m.getId()))
                 .findFirst();
     }
 
     @Override
-    public List<BackedMission> findByAgent(String agentId) {
+    public List<Mission> findByAgent(String agentId) {
         return missions.stream()
                 .filter(m -> {
                     Agent agent = m.getAgent();
@@ -41,17 +50,16 @@ public class InMemoryBackedMissionsRepository implements BackedMissionsRepositor
 
     @Override
     public boolean removeBackup(String missionId, String backupId) {
-        Optional<BackedMission> missionOpt = findById(missionId);
+        Optional<BackedMission> missionOpt = findBackedById(missionId);
         if (!missionOpt.isPresent() || missionOpt.get().getBackup() == null) {
             return false;
         }
 
         BackedMission mission = missionOpt.get();
-        Optional<Agent> backupAgent = mission.getBackup().stream()
-                .filter(a -> a != null && backupId.equals(a.getId()))
-                .findFirst();
+        boolean hasBackupAgent = mission.getBackup().stream()
+                .anyMatch(a -> a != null && backupId.equals(a.getId()));
 
-        if (!backupAgent.isPresent()) {
+        if (!hasBackupAgent) {
             return false;
         }
 

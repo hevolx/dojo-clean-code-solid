@@ -4,39 +4,23 @@
 
 A Coding Dojo based on the universe of Metal Gear Solid. Five exercises will be presented to introduce the principles behind the SOLID acronym.
 
-## Dojo
+## Solution - Open / Closed Principle
 
-### Open / Closed Principle
+The `MissionsService` had been modified to include `BackedMission`-specific methods (`getAllBackedMissions`, `getAgentBackedMissions`, `getBackedMissionInformation`, `removeBackupFromMission`). This violates OCP: to add a new feature, we modified an existing, working class.
 
-> "A class is closed, since it may be compiled, stored in a library, baselined, and used by client classes. But it is also open, since any new class may use it as parent, adding new features. When a descendant class is defined, there is no need to change the original or to disturb its clients." Bertrand Meyer.
+**The fix:**
 
-This is one of the most important principles, if you want to be able to make your application grow.
+- A new `BackedMissionsService` class that **extends** `MissionsService` was created.
+- All `BackedMission`-specific logic was moved there.
+- `MissionsService` was restored to its clean state — untouched by the new feature.
 
-To apply this principle efficiently, you must already have a modular application, respecting the **Single Responsibility Principle**.
+Now `MissionsService` is **closed for modification** but **open for extension**.
 
-To put it in context: what if we want to serve tea as well as coffee? One could rush the feature by adding a parameter with the type of drink and a dirty `if`... But not us!
-
-We can instead make a new `TeaService` with the specific treatment, and have both services implement a `DrinkService` interface.
+Checkout into the next exercise:
 
 ```
-Well done with the previous mess !
-
-Now, if we want to be able to add more specificities to the project, we will need to rethink our classes strategy.
+git checkout java-exercise-3
 ```
-
-#### Exercise
-
-Checkout into the `java-exercise-2` branch.
-
-A new feature has been added: missions with backup agents. These are an extension of regular missions, but with a list of agents that can be used as backup.
-
-Unfortunately, the feature was rushed and we now have a messy `MissionsService`.
-
-Look for the `TODO (Exercise 2 - OCP)` comments in the code.
-
-Try to clean it by putting all the `BackedMission` specifics in a new class that **extends** `MissionsService`.
-
-You will find a solution to this exercise in the `java-exercise-2-solution` branch.
 
 ## Requirements
 
