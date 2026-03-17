@@ -14,11 +14,6 @@ public class BackedMissionsService extends MissionsService {
         this.backedMissionsRepository = backedMissionsRepository;
     }
 
-    // TODO (Exercise 3 - LSP): This method overrides addMission() from MissionsService and adds
-    //  a stronger precondition: the mission must have at least one backup agent.
-    //  This violates LSP because callers of MissionsService cannot substitute BackedMissionsService
-    //  without knowing about this additional constraint.
-    //  Fix: rename this method (e.g. addBackedMission) so it does not override the parent's contract.
     @Override
     public boolean addMission(Mission mission) {
         if (!BackedMissionsHelpers.hasBackup((BackedMission) mission)) {
