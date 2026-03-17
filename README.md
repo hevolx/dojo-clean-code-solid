@@ -40,8 +40,6 @@ Checkout into the `java-exercise-1` branch.
 
 Try to clean up the `addMission` method in the `MissionsService` by splitting the responsibilities into different classes.
 
-Look for the `TODO (Exercise 1 - SRP)` comments in the code for hints on where to start.
-
 You will find a solution to this exercise in the `java-exercise-1-solution` branch.
 
 ## Requirements
