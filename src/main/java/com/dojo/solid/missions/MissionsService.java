@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class MissionsService {
-    // TODO (Exercise 1 - SRP): MissionsService depends on a concrete implementation.
-    //  It should depend on the MissionsRepository interface instead.
     private InMemoryMissionsRepository missionsRepository;
 
     public MissionsService(InMemoryMissionsRepository missionsRepository) {
@@ -17,9 +15,6 @@ public class MissionsService {
     }
 
     public boolean addMission(Mission mission) {
-        // TODO (Exercise 1 - SRP): This method has too many responsibilities.
-        //  The validation logic (isAgentValid, getMissionWithinPeriod) should be
-        //  extracted into a separate MissionPolicies class.
         if (mission == null
                 || mission.getId() == null
                 || mission.getId().isEmpty()
