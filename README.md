@@ -32,8 +32,6 @@ A new feature has been added: missions with backup agents. These are an extensio
 
 Unfortunately, the feature was rushed and we now have a messy `MissionsService`.
 
-Look for the `TODO (Exercise 2 - OCP)` comments in the code.
-
 Try to clean it by putting all the `BackedMission` specifics in a new class that **extends** `MissionsService`.
 
 You will find a solution to this exercise in the `java-exercise-2-solution` branch.
