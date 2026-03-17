@@ -35,8 +35,6 @@ The type InMemoryMissionsRepository must implement the inherited abstract method
 
 Fix the ISP violation: split `Repository<T, K>` into smaller role interfaces so that each repository only depends on what it actually needs.
 
-Look for the `TODO (Exercise 4 - ISP)` comment in `Repository.java` for hints.
-
 You will find a solution to this exercise in the `java-exercise-4-solution` branch.
 
 ## Requirements
