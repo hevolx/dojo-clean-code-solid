@@ -30,8 +30,6 @@ Checkout into the `java-exercise-5` branch.
 
 `AgentsService` makes an explicit reference to the concrete `InMemoryAgentsRepository` class.
 
-Look for the `TODO (Exercise 5 - DIP)` comment and abstract the dependency.
-
 You will find a solution to this exercise in the `java-exercise-5-solution` branch.
 
 ## Requirements
