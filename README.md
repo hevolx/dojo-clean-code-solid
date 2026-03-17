@@ -32,8 +32,6 @@ The team has decided that a `BackedMission` must have at least one backup agent.
 
 Look at `BackedMissionsService`. It **overrides** `addMission()` and adds a new precondition: the mission must have a backup. This violates LSP — you cannot substitute a `BackedMissionsService` for a `MissionsService` because the behavior of `addMission()` is different.
 
-Look for the `TODO (Exercise 3 - LSP)` comment for a hint.
-
 You will find a solution to this exercise in the `java-exercise-3-solution` branch.
 
 ## Requirements
